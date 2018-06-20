@@ -1,0 +1,13 @@
+{% extends 'movies/latest-movies.html' %}
+
+{% block header %}
+
+{% if movies %}
+  {% for movie in movies %}
+    <h5><strong>MOVIE: {{movie.title|title}} </strong></h5>
+  {% endfor %}
+{% else %}
+  <p>Sorry, movie not found. Try a different movie. </p>
+{% endif %}
+
+{% endblock %}

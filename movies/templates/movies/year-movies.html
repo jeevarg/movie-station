@@ -1,0 +1,23 @@
+{% extends 'movies/base.html' %}
+{% block header %}
+<div class="header">
+    <h4>MOVIES : YEAR : {{year}}</h4>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for movie in movies %}
+    {% if movie.release_dt.year == year %}
+      <div class="col-md-3"><a href="{% url 'movies:movie-overview' movie.id %}" ><img src="{{movie.photo.url}}" alt="Image" width="90%;"/></a>
+      <div class="carousel-caption" style="color:#222222; position:relative; left:auto; right:auto;">
+        <h4>{{movie.title|title}}</h4>
+          {{movie.release_dt}}
+      </div>
+      </div>
+      {% endif %}
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

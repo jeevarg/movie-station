@@ -1,0 +1,43 @@
+{% extends 'movies/base.html' %}
+
+{% block header %}
+<div class="header">
+  <h4>MOVIE: {{movie.title|title}}</h4>
+</div>
+
+  <ul class="nav nav-pills nav-left">
+            <li style="background-color:gray;"><a style="color:#222222" href="{% url 'movies:movie-overview' movie.id %}" target="_self">OVERVIEW</a></li>
+              <li style="background-color:gray"><a style="color:#222222" href="{% url 'movies:movie-plot' movie.id %}">PLOT</a></li>
+              <li style="background-color:gray"><a style="color:#222222" href="{% url 'movies:movie-reviews' movie.id %}">REVIEWS</a></li>
+              <li style="background-color:gray"><a style="color:#222222" href="{% url 'movies:cast-crew' movie.id %}">CAST + CREW</a></li>
+            </ul>
+{% endblock %}
+
+{% block content %}
+  <div class="container" style="width:100%">
+  <div class="row">
+    <div class="col-md-3">
+      <img src="{{movie.photo.url}}" alt="Image"/>
+    </div>
+    <div class="col-md-2" style="text-align: center;">
+      <ul class="list-inline">
+                </br>Release Date</br>
+                <li><h4><strong>{{movie.release_dt}}</strong> <h4> </li></br>
+                <li><p>{{movie.pg_rating}} </p></li></br>
+                <li><p>
+                {% for genre in movie.genre.all %}
+                  {{genre.text|title}}
+                 {% endfor %}
+                </p></li>
+            </ul>
+    </div>
+    <div class="col-md-6" style="background-color:silver">
+      {% block movie-overview%}
+      <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{movie.trailer}}" width="100%"></iframe>
+    </div>
+    {% endblock %}
+  </div>
+  </div>
+</div>
+{% endblock %}

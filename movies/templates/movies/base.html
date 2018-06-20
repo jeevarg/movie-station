@@ -1,0 +1,115 @@
+{% load bootstrap3 %}
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang='en'>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content="IE=edge">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="{% static 'style1.css' %}">
+    <script src="{% static 'assets/ajax.js' %}"></script>
+    <title>Movie Station</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <!--script for nested dropdown menus-->
+    <script>
+      $(document).ready(function(){
+      $('.dropdown a.test').on("click", function(e){
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+      });
+    });
+  </script>
+  </head>
+  <body style="background-color:lightgray;padding-top:10px;">
+<div class="container-fluid" style="padding:0px; width:75%;">
+
+  <div class="header" style="padding:0px;margin:0px;background-color:#222222;">
+    <nav class="navbar navbar-inverse" style="border-style:none;padding:0px; margin:0px;">
+        <div class="header">
+          <a style="color:#3E8EDE" class="navbar-brand" href="{% url 'movies:index' %}"><h3><strong>MOVIE STATION - </strong><span class="glyphicon glyphicon-film"></span></h3></a>
+        </div>
+    </nav>
+    <br>
+    <nav class="navbar navbar-inverse" style="border-style:none;padding:0px; margin:0px;">
+      <h4>
+        <div class="navbar-header" style="padding:0px;right:auto">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">MOVIES<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a tabindex="-1" href="{% url 'movies:latest-movies' %}">Latest Movies</a></li>
+                <li><a tabindex="-1" href="{% url 'movies:movies-years' %}">Year</a></li>
+                <li class="dropdown">
+                  <a class="test" tabindex="-1" href="#">Genre<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'movies:movies-by-genre' 1%}">Action</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 2%}">Romance</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 3%}">Comedy</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 4%}">Drama</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 5%}">Horror</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 6%}">Sci-Fi</a></li>
+              <li><a href="{% url 'movies:movies-by-genre' 7%}">Animation</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+          <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">CELEBS<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="{% url 'movies:born-today' %}">Born Today</a></li>
+          <li><a tabindex="-1" href="{% url 'movies:latest-posters' %}">Latest Posters</a></li>
+          </ul>
+          </li>
+          <li><a href="{% url 'movies:watch-list' %}">WATCH LIST</a></li>
+          <li>
+
+          <form action="{% url 'movies:search-data' %}" method="post">
+          {% csrf_token %}
+            <input type="text" name="searchdata" placeholder="enter movie name">
+              <button class="btn btn-default glyphi-search" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+          </form>
+
+        </li>
+        </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li><a>Hello, {{ user.username.title }}.</a></li>
+                <li><a href = "{% url 'users:logout' %}">Log Out</a></li>
+            {% else %}
+            <li><a href="{% url 'users:signup' %}"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
+            <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+            {% endif %}
+      </ul>
+        </div>
+      </h4>
+  </nav>
+
+  </div>
+
+  <div class="content" style="background-color:lightgray;padding:10px;border-style: inset; border-width: 2px;">
+{% block header %}
+<div>
+  {% if messages %}
+    <ul class="messages">
+      {% for m in messages %}
+      <li>{{m}}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+{% endblock %}
+  </div>
+  <div class="footer" style="background-color:lightgray;min-height: 70%; padding:10px;border-style: inset; border-width: 2px;">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+</div>
+  </body>
+</html>

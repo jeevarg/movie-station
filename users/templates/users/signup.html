@@ -1,0 +1,12 @@
+{% extends 'movies/base.html' %}
+{% block header %}
+  <h4>Sign Up / Register</h4>
+{% endblock %}
+{% block content %}
+  <form method='post' action="{% url 'users:signup' %}">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button name='submit'>Sign Up</button>
+  <input type='hidden' name='next' value="{% url 'movies:index' %}"/>
+</form>
+{% endblock content%}

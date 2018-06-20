@@ -1,0 +1,20 @@
+{% extends 'movies/base.html' %}
+
+{% block header %}
+    <h5><strong>MOVIES-GENRE: {{genre.text|upper}} </strong></h5>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width:100%;">
+  <div class="row">
+    {% for movie in movies %}
+      <div class="col-md-3"><a href="{% url 'movies:movie-overview' movie.id %}" ><img src="{{movie.photo.url}}" alt="Image" width="90%;"/></a>
+      <div class="carousel-caption" style="color:#222222; position:relative; left:auto; right:auto;">
+        <h4>{{movie.title|title}}</h4>
+          {{movie.release_dt}}
+      </div>
+      </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

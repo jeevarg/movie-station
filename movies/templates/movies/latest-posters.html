@@ -1,0 +1,17 @@
+{% extends 'movies/base.html' %}
+
+{% block header %}
+<div class="header">
+    <h4>LATEST POSTERS</h4>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <ul class="pagination">
+    {% for movie in movies %}
+      <li class="col-md-2"><a href="{% url 'movies:movie-overview' movie.id %}"><img src="{{movie.photo.url}}" alt="alternative text" title="{{movie.title|title}} ({{ movie.release_dt.year}})" width="100%"/></a></li>
+    {% endfor %}
+ </ul>
+</div>
+{% endblock %}

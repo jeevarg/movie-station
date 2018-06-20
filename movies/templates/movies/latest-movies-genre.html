@@ -1,0 +1,8 @@
+{% extends 'movies/latest-movies.html' %}
+
+{% block header %}
+<h4>LATEST MOVIES: {{genre.title}}</h4>
+<strong> <ul class="nav nav-pills">
+    <li class="active"><a href="{% url 'movies:latest-movies'%}"> Go Back</a></li></ul>
+</strong>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extend 'movies/base.html' %}
+
+{% block header%}
+<div class="header">
+    <h4>Most Popular Movies</h4>
+  </div>
+{% endblock %}
+{% block content %}
+<h5>Showing count Titles</h5>
+<div class="container-fluid">
+    {% for movie in movies %}
+    <div class="row">
+      <div class="col-md-1">
+        <img src="movie.photo.url" alt="Image"/>
+      </div>
+      <div class="col-md-10">
+        {{movie.title|title}} ({{ movie.release_dt.year}})
+      </div>
+      <div class="col-md-1">
+
+      </div>
+    </div>
+</div>
+{% endblock %}

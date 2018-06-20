@@ -1,0 +1,10 @@
+{% extends 'movies/base.html' %}
+  {% block header %}
+    <h4>Your Watchlist</h4>
+  {% endblock%}
+{% block content %}
+<div class="jumbotron">
+  <p><a href="{% url 'users:login' %}"> Sign in </a> to view your Watchlist </p>
+  <p>Keep track of your favorites! Use your Watchlist to collect old, new, and upcoming movies and TV shows you want to watch.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'movies/base.html' %}
+
+{% block header%}
+<div class="header">
+    <h4>Most Popular Movies</h4>
+  </div>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" style="padding:5px;border-bottom:2px solid silver;">
+    <div class="row" >
+      <div class="col-md-1">
+        <strong>Movie</strong>
+      </div>
+      <div class="col-md-7">
+        <strong>Movie Title</strong>
+      </div>
+      <div class="col-md-2">
+        <strong>Add to Watchlist</strong>
+      </div>
+
+    </div>
+  </div>
+{% for m in movies %}
+<div class="container-fluid" style="padding:1px;border-bottom:2px solid silver;">
+    <div class="row" >
+      <div class="col-md-1">
+        <img src="{{m.photo.url}}" alt="Image" width="80%"/>
+      </div>
+      <div class="col-md-8">
+        {{m.title|title}} ({{ m.release_dt.year}})
+      </div>
+      <div class="col-md-1">
+        <a href="{% url 'movies:watchlist-add' m.id %}"><span class="glyphicon glyphicon-plus" style="background-color:silver; padding:5px;"></span></a>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+{% endblock %}

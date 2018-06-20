@@ -1,0 +1,29 @@
+{% extends 'movies/base.html' %}
+
+{% block header %}
+
+<div class="header">
+    <h4>LATEST MOVIES: Filter by Genre</h4>
+  </div>
+  <strong><ul class="nav nav-pills" >
+      {% for genre in genres %}
+          <li class="active"><a href="{% url 'movies:latest-movies-genre' genre.id %}">{{genre.text|title}}</a></li>
+      {% endfor %}
+  </ul>
+  </strong>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width:100%";>
+  <div class="row">
+    {% for movie in movies %}
+      <div class="col-md-3"><a href="{% url 'movies:movie-overview' movie.id %}"><img src="{{movie.photo.url}}" alt="Image" width="90%;"/></a>
+      <div class="carousel-caption" style="color:#222222; position:relative; left:auto; right:auto;">
+        <h4>{{movie.title|title}}</h4>
+          {{movie.release_dt}}
+      </div>
+      </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'movies/base.html' %}
+{% block header%}
+<div class="header">
+  <h4>Actor/ Writer/ Director Info Page</h4>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <img src="{{person.image.url}}" alt="Image" width="90%;"/>
+        </div>
+        <div class="col-md-7" style="background-color:#DBDBDB;">
+          <br><br>
+          <strong>Name: </strong>{{person}}</br><br>
+          <strong>D-O-B: </strong>{{person.dob}}</br></br>
+          <strong>City: </strong>{{person.city|title}}</br></br>
+          <strong>State: </strong>{{person.state|upper}}</br></br>
+          <strong>Country: </strong>{{person.country}}</br><br>
+
+        </div>
+
+      </div>
+    </div>
+{% endblock %}

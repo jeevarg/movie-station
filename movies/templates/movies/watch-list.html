@@ -1,0 +1,53 @@
+{% extends 'movies/base.html' %}
+  {% block header %}
+    <h4>Your Watchlist</h4>
+    {% if watchlist.movie.count > 0 %}
+    {{watchlist.movie.count}} Movies
+    {% else %}
+    {{0}} Movies
+    {% endif %}
+  {% endblock%}
+
+  {% block content %}
+
+  {% if watchlist != 0 %}
+  <div class="container-fluid" style="padding:5px;border-bottom:2px solid silver;">
+      <div class="row" >
+        <div class="col-md-1">
+          <strong>Movie</strong>
+        </div>
+        <div class="col-md-7">
+          <strong>Movie Title</strong>
+        </div>
+        <div class="col-md-2">
+          <strong>Watchlist</strong>
+        </div>
+
+      </div>
+    </div>
+  {% for m in watchlist.movie.all %}
+  <div class="container-fluid" style="padding:1px;border-bottom:2px solid silver;">
+      <div class="row" >
+        <div class="col-md-1">
+          <img src="{{m.photo.url}}" alt="Image" width="80%"/>
+        </div>
+        <div class="col-md-8">
+          {{m.title|title}} ({{ m.release_dt.year}})
+        </div>
+        <div class="col-md-1">
+          <span class="glyphicon glyphicon-ok" style="background-color:silver; padding:5px;"></span>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  {% else %}
+  <div class="jumbotron">
+    <p>There are no movies in your watchlist</p>
+    <p>Explore to get started</p>
+    <p><a href="{% url 'movies:popular-movie-list' %}"> Most Popular movies</a></p>
+  </div>
+  {% endif %}
+
+{% endblock %}

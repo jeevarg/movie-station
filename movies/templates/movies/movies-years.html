@@ -1,0 +1,18 @@
+{% extends 'movies/base.html' %}
+{% block header %}
+    <h4>SEE THE MOVIES BY YEAR</h4>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <strong>
+    <ul class="nav nav-pills">
+        {% for year in years %}
+        <div class="col-sm-1 nav nav-pills">
+            <li class="active"><a href="{% url 'movies:year-movies' year %}">{{year}}</a></li>
+        </div>
+        {% endfor %}
+    </ul>
+    </strong>
+</div>
+{% endblock %}
